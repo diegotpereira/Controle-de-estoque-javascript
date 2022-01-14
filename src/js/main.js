@@ -27,6 +27,19 @@ const geraNome = () => {
 
 geraNome()
 
+// BLOCO BUSCAR MARCAS
+const exibirMarcas = () => {
+    API.get('/marcas')
+        .then(data => {
+            console.log(data);
+            selecionarMarcas.innerHTML = '<option selected>Escolha uma marca...</optin>'
+
+            data.forEach(function(marca) {
+                selecionarMarcas.insertAdjacentHTML('beforeend', `<option data-marca="${marca.id}">${marca.nomeMarca}</option>`)
+            })
+        })
+}
+exibirMarcas()
 
 // BLOCO BUSCAR PRODUTOS E MARCAS
 const buscarProdutoMarcas = () => {

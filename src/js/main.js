@@ -122,3 +122,46 @@ formMarca.addEventListener('submit', event => {
         }, 500)
     }
 })
+
+// Adicionar Novo Produto
+const addNovoProduto = () => {
+    API.post('/produtos', {
+        nomeProduto: formProdutoNome.value,
+        valor: formProdutoValor.value,
+        quantidade: formProdutoQtdade.value,
+        marcaId: selecionarMarcas.options[selecionarMarcas.selectedIndex].dataset.marca
+    }).then(data => {
+        console.log(data);
+    })
+    const novaMarcaForm = new Toast(`Novo Produto: ${formProdutoNome.value}`, `Novo produto adicionado com sucesso.`)
+    novaMarcaForm.novoToast()
+}
+
+formProduto.addEventListener('submit', event => {
+    event.preventDefault()
+
+    if (!formProdutoNome.value) {
+        formProdutoNome.classList.add('is-invalid')
+    } else {
+        formProdutoNome.classList.remove('is-invalid')
+        addNovoProduto()
+
+        formProdutoNome.value = ''
+        formProdutoQtdade.value = ''
+        formProdutoValor.value = ''
+        formBtnAddProduto.setAttribute('disabled', 'disabled')
+        formBtnAddProduto.innerHTML = `
+                                 <div class="spinner-border spinner-border-sm text-dark" role="status">
+                                    <span class="sr-only">Carregando...</span>
+                                 </div>
+                                      `
+
+        setTimeout(() => {
+            buscarProdutoMarcas()
+            exibirMarcas()
+
+            formBtnAddProduto.removeAttribute('disabled')
+            formBtnAddProduto.innerHTML = 'Adicionar produto'
+        }, 500)
+    }
+})

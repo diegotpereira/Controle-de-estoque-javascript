@@ -55,6 +55,13 @@
       "quantidade": "2",
       "marcaId": "6",
       "id": 8
+    },
+    {
+      "nomeProduto": "produto teste",
+      "valor": "500",
+      "quantidade": "25",
+      "marcaId": "7",
+      "id": 9
     }
   ],
   "marcas": [
@@ -83,7 +90,7 @@
       "id": 6
     },
     {
-      "nomeMarca": "teste marca",
+      "nomeMarca": "marca teste",
       "id": 7
     }
   ],
@@ -95,14 +102,6 @@
     {
       "nomeAdmin": "Diego Pereira",
       "id": 2
-    },
-    {
-      "nomeAdmin": "teste",
-      "id": 3
-    },
-    {
-      "nomeAdmin": "teste",
-      "id": 4
     }
   ]
 }

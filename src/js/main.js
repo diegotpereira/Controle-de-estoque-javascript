@@ -29,7 +29,7 @@ geraNome()
 
 
 // BLOCO BUSCAR PRODUTOS E MARCAS
-const buscarProduto = () => {
+const buscarProdutoMarcas = () => {
     API.getBoth('/produtos', '/marcas')
         .then(data => {
             console.log(data);
@@ -47,22 +47,28 @@ const buscarProduto = () => {
 
                 listaProdutos.insertAdjacentHTML('beforeend', `
                  <li class="list-group-item bg-my-dark-light">
-                    <div class="col-3">
-                       <span class="font-weight-bold">${produto.nomeProduto}</span>
-                    </div>
-                    <div class="col-2">
-                       ${nomeDaMarca}
-                    </div>
-                    <div class="col-2>
-                        R$ ${produto.valor}
-                    </div>
-                    <div class="col-2>
-                        R$ ${itemQuantidade}
+                    <div class="row align-items-center">
+                        <div class="col-3">
+                            <span class="font-weight-bold">${produto.nomeProduto}</span>
+                        </div>
+                        <div class="col-2">
+                            ${nomeDaMarca}
+                        </div>
+                        <div class="col-2">
+                            R$ ${produto.valor}
+                        </div>
+                        <div class="col-2">
+                            ${itemQuantidade}
+                        </div>
+                        <div class="col-3 text-right">
+                            <button class="btn btn-sm btn-outline-my-purple" data-toggle="modal" data-target="#myModal">Editar</button>
+                            <button class="btn btn-sm btn-outline-my-red ml-2">Excluir</button>
+                        </div>
                     </div>
                  </li>
-                                                              `)
+                `)
             })
         })
 }
 
-buscarProduto()
+buscarProdutoMarcas()

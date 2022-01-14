@@ -81,6 +81,10 @@
     {
       "nomeMarca": "Dell",
       "id": 6
+    },
+    {
+      "nomeMarca": "teste marca",
+      "id": 7
     }
   ],
   "admins": [

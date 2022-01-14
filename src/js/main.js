@@ -11,9 +11,10 @@ const formProduto = document.querySelector('#form-add-produto')
 const formProdutoNome = document.querySelector('#input-produto-nome')
 const formProdutoQtdade = document.querySelector('#input-produto-qtdade');
 const formProdutoValor = document.querySelector('#input-produto-valor')
-const formBtnAddProduto = document.querySelector('#input-produto-valor')
+const formBtnAddProduto = document.querySelector('#btn-add-produto')
 const formMarca = document.querySelector('#form-add-marca')
-const formMarcaNome = document.querySelector('#btn-add-marca')
+const formMarcaNome = document.querySelector('#input-marca-nome')
+const formBtnAddMarca = document.querySelector('#btn-add-marca');
 const listaProdutos = document.querySelector('#lista-produtos')
 
 const geraNome = () => {
@@ -85,3 +86,39 @@ const buscarProdutoMarcas = () => {
 }
 
 buscarProdutoMarcas()
+
+// Adicionar Nova Marca
+const addNovaMarca = () => {
+    API.post('/marcas', {
+        nomeMarca: formMarcaNome.value
+    }).then(data => {
+        console.log(data);
+    })
+
+    const novaMarcaForm = new Toast(`Nova marca: ${formMarcaNome.value}`, `Nova marca adicionada com sucesso`)
+    novaMarcaForm.novoToast()
+}
+
+formMarca.addEventListener('submit', event => {
+    event.preventDefault()
+
+    if (!formMarcaNome.value) {
+        formMarcaNome.classList.add('is-invalid')
+    } else {
+        formMarcaNome.classList.remove('is-invalid')
+        addNovaMarca()
+
+        formMarcaNome.value = ''
+        formBtnAddMarca.setAttribute('disabled', 'disabled')
+        formBtnAddMarca.innerHTML = `
+                                <div class="spinner-border spinner-border-sm text-dark" role="status">
+                                   <span class="sr-only">Carregando...</span>
+                                </div>
+                                    `
+        setTimeout(() => {
+            exibirMarcas()
+            formBtnAddMarca.removeAttribute('disabled')
+            formBtnAddMarca.innerHTML = 'Adicionar marca'
+        }, 500)
+    }
+})
